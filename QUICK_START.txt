@@ -21,9 +21,13 @@ REMOTE APP LOCK — SINGLE-USER QUICK START
 
 3. PHONE
   - Install and open the APK. No pairing or configuration is shown.
-  - Tap Open Accessibility settings and enable Remote App Lock Protection.
+  - Enable Usage Access and Display over other apps in setup.
+  - Accessibility is no longer used. Leave the old Protection service off.
   - Allow notifications and tap Allow background operation so the protection
     process remains active after the app is removed from Recents.
+  - Xiaomi/Redmi: enable Autostart, background pop-up windows and battery
+    No restrictions using the setup shortcuts. Reopen the app afterward.
+  - Notification-reading access is not required.
   - The phone registers and uploads its app list automatically.
 
 4. PC
@@ -32,5 +36,15 @@ REMOTE APP LOCK — SINGLE-USER QUICK START
   - Refresh, choose an app, and lock it.
   - Lock commands normally sync within 15 seconds.
   - The displayed six-digit OTP unlocks the app; OTPs expire after 5 minutes.
+  - A locked app gets a sliding focus/OTP screen after usage detection.
+    Back to focus returns Home without clearing the lock.
+  - Returning from Recents shows the lock again while the remote lock is active.
+  - Payment apps and sensitive system screens recognized by the phone are
+    excluded even if locked on the dashboard. UPI handlers are detected locally.
+
+Run .\gradlew.bat :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
+from android/, and npm test from cloudflare/.
+Validate the phone flow using tests/android-manual.md. Google Pay compatibility
+is not guaranteed; Android may still flag overlay permission.
 
 Only use this on a device you own or administer with informed consent.

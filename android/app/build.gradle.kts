@@ -24,8 +24,8 @@ android {
         applicationId = "com.example.remoteapplock"
         minSdk = 26
         targetSdk = 35
-        versionCode = 7
-        versionName = "0.7.0"
+        versionCode = 9
+        versionName = "0.9.0"
         buildConfigField("String", "WORKER_URL", quotedBuildValue(configuredValue("REMOTE_APP_LOCK_URL").trimEnd('/')))
         buildConfigField("String", "DEVICE_TOKEN", quotedBuildValue(configuredValue("REMOTE_APP_LOCK_DEVICE_TOKEN")))
     }
@@ -37,4 +37,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = "17" }
+}
+
+dependencies {
+    testImplementation("junit:junit:4.13.2")
 }

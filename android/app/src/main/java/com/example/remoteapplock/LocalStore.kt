@@ -29,16 +29,27 @@ class LocalStore(context: Context) {
         prefs.edit().putString("remoteLocks", filtered.toString()).apply()
     }
 
-    @Synchronized fun clearRemoteLock(pkg: String) {
+    fun lockVersion(pkg: String): Long? {
+        val all = remoteLocks()
+        for (i in 0 until all.length()) {
+            val item = all.optJSONObject(i) ?: continue
+            if (item.optString("packageName") == pkg) return item.optLong("lockVersion", 0L)
+        }
+        return null
+    }
+
+    @Synchronized fun clearRemoteLock(pkg: String, verifiedVersion: Long) {
         val all = remoteLocks()
         val result = JSONArray()
         val ignored = ignoredVersions()
         for (i in 0 until all.length()) {
             val item = all.optJSONObject(i) ?: continue
-            if (item.optString("packageName") == pkg) {
-                ignored.put(pkg, item.optLong("lockVersion", 0L))
-            } else result.put(item)
+            if (item.optString("packageName") != pkg || item.optLong("lockVersion", 0L) > verifiedVersion) {
+                result.put(item)
+            }
         }
+        // Remember the verified version even if a concurrent poll already removed it.
+        ignored.put(pkg, maxOf(ignored.optLong(pkg, -1L), verifiedVersion))
         prefs.edit()
             .putString("remoteLocks", result.toString())
             .putString("ignoredVersions", ignored.toString())

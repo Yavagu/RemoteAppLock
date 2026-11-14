@@ -70,7 +70,7 @@ input:focus,select:focus{border-color:#5c70e9;box-shadow:0 0 0 3px #5a6fec20}
 <section id="dashboard" class="hidden">
 <div class="toolbar"><div class="row"><select id="devices" class="device-picker" aria-label="Select phone"></select></div><div class="row"><span id="lastSync" class="small muted"></span><button id="refresh" class="btn neutral">↻ Refresh</button></div></div>
 <div class="stats"><div class="card stat"><div class="caption">Installed apps</div><div id="totalApps" class="number">0</div></div><div class="card stat"><div class="caption">Currently locked</div><div id="lockedApps" class="number">0</div></div><div class="card stat"><div class="caption">Device</div><div id="deviceStatus" class="number" style="font-size:19px;margin-top:12px">—</div></div></div>
-<div class="card panel"><div class="panel-heading"><div><h2>Applications</h2><p class="inline-note">A correct OTP unlocks the app until you lock it again. A lock also expires when its timer runs out.</p></div><input id="search" class="search" placeholder="Search apps or package..." aria-label="Search apps"></div><div id="appList" class="app-list"><div class="empty">Select a phone to load its apps.</div></div></div>
+<div class="card panel"><div class="panel-heading"><div><h2>Applications</h2><p class="inline-note">A correct OTP unlocks the app until you lock it again. A lock also expires when its timer runs out. The phone excludes recognized payment apps and sensitive system screens, even if marked Locked here.</p></div><input id="search" class="search" placeholder="Search apps or package..." aria-label="Search apps"></div><div id="appList" class="app-list"><div class="empty">Select a phone to load its apps.</div></div></div>
 </section>
 </main></div>
 <div id="modalHost"></div>
