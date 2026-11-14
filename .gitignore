@@ -1,0 +1,25 @@
+# Local config, build outputs, secrets
+*.apk
+*.aab
+.DS_Store
+node_modules/
+.gradle/
+.idea/
+build/
+dist/
+local.properties
+*.jks
+*.keystore
+*.pem
+*.key
+google-services.json
+service-account*.json
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example
+cloudflare/.env
+cloudflare/.dev.vars
+cloudflare/wrangler.toml
+android/gradle/wrapper/gradle-wrapper.jar

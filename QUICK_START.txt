@@ -1,0 +1,36 @@
+REMOTE APP LOCK — SINGLE-USER QUICK START
+==========================================
+
+1. DEPLOY CLOUDFLARE
+  - In cloudflare/: npm install, npx wrangler login
+  - Create D1: npx wrangler d1 create remote-app-lock-db
+  - Copy wrangler.example.toml to wrangler.toml and put its database_id there.
+  - Apply schema: npm run db:remote
+  - Deploy: npm run deploy
+  - Generate three different 32-byte base64 values for ADMIN_TOKEN,
+    OTP_SECRET, and DEVICE_TOKEN.
+  - Set each with: npx wrangler secret put SECRET_NAME
+
+2. BUILD THE PRECONFIGURED APK
+  - Put the Worker URL and the same DEVICE_TOKEN in android/local.properties:
+      REMOTE_APP_LOCK_URL=https://YOUR-WORKER.workers.dev
+      REMOTE_APP_LOCK_DEVICE_TOKEN=YOUR_DEVICE_TOKEN
+  - Use JDK 17 and Android SDK 36.
+  - In android/: gradlew.bat :app:assembleDebug
+  - APK: android/app/build/outputs/apk/debug/app-debug.apk
+
+3. PHONE
+  - Install and open the APK. No pairing or configuration is shown.
+  - Tap Open Accessibility settings and enable Remote App Lock Protection.
+  - Allow notifications and tap Allow background operation so the protection
+    process remains active after the app is removed from Recents.
+  - The phone registers and uploads its app list automatically.
+
+4. PC
+  - Open dashboard/index.html.
+  - Enter the Worker URL and ADMIN_TOKEN.
+  - Refresh, choose an app, and lock it.
+  - Lock commands normally sync within 15 seconds.
+  - The displayed six-digit OTP unlocks the app; OTPs expire after 5 minutes.
+
+Only use this on a device you own or administer with informed consent.

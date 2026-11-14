@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+set -eu
+APP_HOME=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+JAR="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+if [ ! -f "$JAR" ]; then
+  echo 'Run ./bootstrap-wrapper.sh to fetch the verified Gradle wrapper JAR first.' >&2
+  exit 1
+fi
+if [ -n "${JAVA_HOME:-}" ]; then
+  JAVA="$JAVA_HOME/bin/java"
+else
+  JAVA=java
+fi
+exec "$JAVA" -classpath "$JAR" org.gradle.wrapper.GradleWrapperMain "$@"

@@ -1,0 +1,9 @@
+name = "remote-app-lock-mvp"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# Copy this file to wrangler.toml, then create a D1 database and paste its ID below.
+[[d1_databases]]
+binding = "DB"
+database_name = "remote-app-lock-db"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
